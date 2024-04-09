@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_blogs/Core/Theme/Color_pallet.dart';
-import 'package:my_blogs/Features/Auth/Presentation/Screens/SignInScreen.dart';
+import 'package:my_blogs/Features/Auth/Presentation/Screens/LogInScreen.dart';
 import 'package:my_blogs/Features/Auth/Presentation/Screens/SignUpScreen.dart';
 
 class CusText extends StatelessWidget {

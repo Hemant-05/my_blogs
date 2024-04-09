@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_blogs/Core/Common/Widget/Loader.dart';
-import 'package:my_blogs/Core/Utils/ShowSnackBar.dart';
 import 'package:my_blogs/Features/Auth/Presentation/Bloc/auth_bloc.dart';
 import 'package:my_blogs/Features/Auth/Presentation/Widgets/AuthField.dart';
 import 'package:my_blogs/Features/Auth/Presentation/Widgets/AuthGradientButton.dart';
 import 'package:my_blogs/Features/Auth/Presentation/Widgets/CusText.dart';
 
-class SignUpScreen extends StatefulWidget {
+import '../../../../Core/Common/Widget/Loader.dart';
+import '../../../../Core/Utils/ShowSnackBar.dart';
+
+class LogInScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
-        builder: (context) => const SignUpScreen(),
+        builder: (context) => const LogInScreen(),
       );
 
-  const SignUpScreen({super.key});
+  const LogInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LogInScreenState extends State<LogInScreen> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
 
   @override
   void dispose() {
     emailController.dispose();
-    nameController.dispose();
     passController.dispose();
     super.dispose();
   }
@@ -53,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Sign Up.',
+                    'Log In.',
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
@@ -70,13 +69,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   AuthField(
-                    hint: 'Name',
-                    controller: nameController,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AuthField(
                     hint: 'Password',
                     controller: passController,
                     isObscureText: true,
@@ -85,14 +77,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   AuthGradientButton(
-                    text: 'Sign Up',
+                    text: 'Log In',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
-                              AuthSignUp(
-                                name: nameController.text.toString().trim(),
-                                email: emailController.text.toString().trim(),
-                                pass: passController.text.toString().trim(),
+                              AuthLogin(
+                                email: emailController.text.trim(),
+                                pass: passController.text.trim(),
                               ),
                             );
                       }
@@ -102,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   const CusText(
-                    text: 'Sign In',
+                    text: 'Sign Up',
                   ),
                 ],
               ),
